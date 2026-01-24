@@ -21,7 +21,7 @@
 // Store Recording files to a single folder.
 // This should ensure playback that the game doesn't develop a __MACOSX problem where there are SnipesGameFiles littered everywhere.
 // For Linux: (note, you can't use the ~/SnipesGameFiles naming format)
-#define PLAYBACKFOLDER "/home/username/SnipesGameFiles"
+#define REPLAY_FOLDER "/home/username/SnipesGameFiles"
 //
 // For Windows:
 // #define PLAYBACKFOLDER "C:\SnipesGameFiles"
