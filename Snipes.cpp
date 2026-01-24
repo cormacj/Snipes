@@ -24,6 +24,11 @@
 	#define CREATE_DIRECTORY(path) mkdir(path, 0755)
 #endif
 
+//IF REPLAY_FOLDER is not defined, it should use the current folder.
+#ifndef REPLAY_FOLDER
+    #define REPLAY_FOLDER "."
+#endif
+
 bool got_ctrl_break = false;
 bool forfeit_match = false;
 bool instant_quit = false;
@@ -2281,7 +2286,7 @@ extern "C" int __cdecl SDL_main(int argc, char* argv[])
 			time_t rectime = time(NULL);
 			struct tm *rectime_gmt;
 			rectime_gmt = gmtime(&rectime);
-#ifdef REPLAY_FOLDER
+
 			// Create the replay folder if it doesn't exist
 			CREATE_DIRECTORY(REPLAY_FOLDER);
 
@@ -2291,13 +2296,6 @@ extern "C" int __cdecl SDL_main(int argc, char* argv[])
 					REPLAY_FOLDER,
 					1900+rectime_gmt->tm_year, rectime_gmt->tm_mon+1, rectime_gmt->tm_mday,
 					rectime_gmt->tm_hour, rectime_gmt->tm_min, rectime_gmt->tm_sec);
-#else
-            char replayFilename[1024];
-            snprintf(replayFilename, sizeof(replayFilename),
-                    "%04d-%02d-%02d %02d.%02d.%02d.SnipesGame",
-                    1900+rectime_gmt->tm_year, rectime_gmt->tm_mon+1, rectime_gmt->tm_mday,
-                    rectime_gmt->tm_hour, rectime_gmt->tm_min, rectime_gmt->tm_sec);
-#endif
 
 #ifdef CHEAT
 			replayFile = fopen(replayFilename, "w+b");
